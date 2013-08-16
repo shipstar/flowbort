@@ -2,5 +2,5 @@
   "redis-brain.coffee", "shipit.coffee", "archer.coffee",
   "plusplus.coffee", "points.coffee", "swanson.coffee",
   "location-decision-maker.coffee", "giphy.coffee", "remind.coffee",
-  "keep-alive.coffee"
+  "keep-alive.coffee", "ambush.coffee", "brb.coffee"
 ]
