@@ -1,1 +1,5 @@
-["redis-brain.coffee", "shipit.coffee", "archer.coffee","plusplus.coffee","points.coffee","swanson.coffee","location-decision-maker.coffee","giphy.coffee"]
+[
+  "redis-brain.coffee", "shipit.coffee", "archer.coffee",
+  "plusplus.coffee", "points.coffee", "swanson.coffee",
+  "location-decision-maker.coffee", "giphy.coffee", "remind.coffee"
+]
