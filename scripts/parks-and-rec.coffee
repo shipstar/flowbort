@@ -8,7 +8,7 @@
 #   None
 #
 # Commands:
-#   parks - Display a random Parks and Rec gif/image
+#   hubot parks - Display a random Parks and Rec gif/image
 #
 # Author:
 #   shipstar
