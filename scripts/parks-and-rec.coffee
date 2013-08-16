@@ -66,4 +66,4 @@ module.exports = (robot) ->
     msg.send msg.random images
 
   robot.hear /comic sans/i, (msg) ->
-    msg.send "http://cdn.uproxx.com/wp-content/uploads/2012/01/jerry-comicsans2.gif"
+    msg.reply "http://cdn.uproxx.com/wp-content/uploads/2012/01/jerry-comicsans2.gif"
