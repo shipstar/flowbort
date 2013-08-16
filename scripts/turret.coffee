@@ -17,6 +17,5 @@ module.exports = (robot) ->
       .get() (err, res, body) ->
         $ = cheerio.load(body)
 
-        wavs = $("a[href$=wav]")
-        index = Math.floor(Math.random() * wavs.length)
-        msg.send $(wavs[index]).attr('href')
+        wav = msg.random $("a[href$=wav]")
+        msg.send $(wav).attr('href')
