@@ -9,6 +9,8 @@
 #
 # Commands:
 #   brb (or afk, or bbl)
+#   hubot is <user> really here?
+#   hubot is <user> really away?
 #
 # Author:
 #   tonydewan
@@ -21,7 +23,7 @@ module.exports = (robot) ->
   away_triggers = ['brb', 'afk', 'bbl']
 
   robot.hear /./i, (msg) ->
-    if robot.brain.get("away:#{msg.message.user.name}") and !_.contains(away_triggers, msg.message.text)
+    if robot.brain.get("away:#{msg.message.user.name.toLowerCase()}") and !_.contains(away_triggers, msg.message.text)
       msg.send "Welcome back " + msg.message.user.name + "!"
       robot.brain.remove "away:#{msg.message.user.name.toLowerCase()}"
     else
@@ -35,7 +37,7 @@ module.exports = (robot) ->
     if robot.brain.get "away:#{msg.match[1].toLowerCase()}"
       msg.send "#{msg.match[1]} is definitely away"
     else
-      msg.send "I don't know for sure, but I think so"
+      msg.send "I don't know for sure, but I think #{msg.match[1]} is here."
 
 
   robot.hear new RegExp("(#{away_triggers.join('|')})", "i"), (msg) ->
