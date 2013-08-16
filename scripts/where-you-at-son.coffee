@@ -30,7 +30,7 @@ getAmbiguousUserText = (users) ->
     "Be more specific, I know #{users.length} people named like that: #{(user.name for user in users).join(", ")}"
 
 module.exports = (robot) ->
-  robot.respond /i'm at (.*)/i, (msg) ->
+  robot.respond /i(?:'?|\s?a?)m at (.*)/i, (msg) ->
     userName = msg.envelope.user.name
     location = msg.match[1].trim()
     robot.brain.set "location:#{userName}", location
