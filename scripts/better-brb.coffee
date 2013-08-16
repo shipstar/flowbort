@@ -2,7 +2,7 @@
 #   Natural availability tracking, but better.
 #
 # Dependencies:
-#   None
+#   "underscore": ">=1.0.0"
 #
 # Configuration:
 #   None
@@ -40,6 +40,6 @@ module.exports = (robot) ->
       msg.send "I don't know for sure, but I think #{msg.match[1]} is here."
 
 
-  robot.hear new RegExp("(#{away_triggers.join('|')})", "i"), (msg) ->
+  robot.hear new RegExp("^(#{away_triggers.join('|')})$", "i"), (msg) ->
     robot.brain.set "away:#{msg.message.user.name.toLowerCase()}", true
     msg.send "Later, #{msg.message.user.name}."
