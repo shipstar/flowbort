@@ -1,1 +1,1 @@
-web: bin/hubot -a flowdock -n flowbot
+web: bin/hubot -a flowdock -n refounder
