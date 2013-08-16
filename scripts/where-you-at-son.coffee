@@ -15,6 +15,17 @@
 # Author:
 #   shipstar
 
+unknownLocations = [
+  "in the wind...",
+  "AWOL.",
+  "in the ether, man!",
+  "fighting commies somewhere.",
+  "AFK.",
+  "out. Don't pout.",
+  "gone fishin'.",
+  "taking a long walk off a short pier."
+]
+
 getAmbiguousUserText = (users) ->
     "Be more specific, I know #{users.length} people named like that: #{(user.name for user in users).join(", ")}"
 
@@ -34,7 +45,7 @@ module.exports = (robot) ->
       if location = robot.brain.get("location:#{user.name}")
         msg.send "#{user.name} is at " + location
       else
-        msg.send "#{user.name} is in the wind..."
+        msg.send "#{user.name} is #{msg.random unknownLocations}"
     else if users.length > 1
       msg.send getAmbiguousUserText users
     else
@@ -46,10 +57,10 @@ module.exports = (robot) ->
     if location = robot.brain.get("location:#{userName}")
       msg.reply "You're at #{location}"
     else
-      msg.reply "You're in the wind..."
+      msg.reply "You're #{msg.random unknownLocations}"
 
   robot.respond /i'm out/i, (msg) ->
     userName = msg.envelope.user.name
 
     robot.brain.remove "location:#{userName}"
-    msg.reply "You're in the wind..."
+    msg.reply "You're #{msg.random unknownLocations} Got it."
