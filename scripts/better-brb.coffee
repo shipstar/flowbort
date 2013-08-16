@@ -24,7 +24,7 @@ module.exports = (robot) ->
 
   robot.hear /./i, (msg) ->
     if robot.brain.get("away:#{msg.message.user.name.toLowerCase()}") and !_.contains(away_triggers, msg.message.text)
-      msg.send "Welcome back " + msg.message.user.name + "!"
+      msg.send "Welcome back " + msg.message.user.name + "!" if msg.message.match(/back/)
       robot.brain.remove "away:#{msg.message.user.name.toLowerCase()}"
     else
       _.each robot.brain.users(), (user) ->
@@ -42,4 +42,4 @@ module.exports = (robot) ->
 
   robot.hear new RegExp("(#{away_triggers.join('|')})", "i"), (msg) ->
     robot.brain.set "away:#{msg.message.user.name.toLowerCase()}", true
-    msg.send 'you are away'
+    msg.send "Later, #{msg.message.user.name}."
