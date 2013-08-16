@@ -28,7 +28,9 @@
     "hubot-scripts": ">= 2.5.0 < 3.0.0",
     "hubot-flowdock": ">= 0.0.1",
     "cheerio": ">= 0.12.1",
-    "scraper": ">= 0.0.9"
+    "scraper": ">= 0.0.9",
+    "underscore": ">=1.5.0",
+    "clark": "0.0.6"
   },
 
   "engines": {
