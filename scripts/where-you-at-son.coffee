@@ -30,11 +30,11 @@ getAmbiguousUserText = (users) ->
     "Be more specific, I know #{users.length} people named like that: #{(user.name for user in users).join(", ")}"
 
 module.exports = (robot) ->
-  robot.respond /i(?:'?|\s?a?)m at (.*)/i, (msg) ->
+  robot.respond /i(?:'?|\s?a?)m (at|in) (.*)/i, (msg) ->
     userName = msg.envelope.user.name
-    location = msg.match[1].trim()
+    location = "#{msg.match[1].trim()} #{msg.match[2].trim()}"
     robot.brain.set "location:#{userName}", location
-    msg.reply "You're at #{location}. Got it."
+    msg.reply "You're #{location}. Got it."
 
   robot.respond /where'?(?:\si)?s (\w*)(?:\?)?/i, (msg) ->
     name = msg.match[1].trim()
@@ -43,7 +43,7 @@ module.exports = (robot) ->
     if users.length is 1
       user = users[0]
       if location = robot.brain.get("location:#{user.name}")
-        msg.send "#{user.name} is at " + location
+        msg.send "#{user.name} is " + location
       else
         msg.send "#{user.name} is #{msg.random unknownLocations}"
     else if users.length > 1
@@ -55,7 +55,7 @@ module.exports = (robot) ->
     userName = msg.envelope.user.name
 
     if location = robot.brain.get("location:#{userName}")
-      msg.reply "You're at #{location}"
+      msg.reply "You're #{location}"
     else
       msg.reply "You're #{msg.random unknownLocations}"
 
