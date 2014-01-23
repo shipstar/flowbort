@@ -10,6 +10,8 @@ This version is designed to be deployed on [Heroku][heroku]. This README was gen
 
 You can test your hubot by running the following.
 
+    % npm install
+
     % bin/hubot
 
 You'll see some start up output about where your scripts come from and a
