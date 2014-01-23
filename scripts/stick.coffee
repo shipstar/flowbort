@@ -51,7 +51,7 @@ module.exports = (robot) ->
     room = room_or_flow(msg)
 
     if robot.brain.get key(msg)
-      stick_user = robot.brain.userForId robot.brain.get("stick")
+      stick_user = robot.brain.userForId robot.brain.get(key(msg))
       robot.brain.set key(msg), null
       msg.send "#{stick_user.name} had the #{room} stick, but I just took it. Now no one has the stick!"
     else
