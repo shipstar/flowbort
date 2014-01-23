@@ -16,33 +16,44 @@
 #
 # Author:
 #   tonydewan
-#   based on brb by jmhobbs
 
 _ = require('underscore')
 
 module.exports = (robot) ->
 
+  room_or_flow = (msg) ->
+    ( msg.message.flow || msg.message.room || "" )
+
+  key = (msg) ->
+    "#{room_or_flow(msg)}:stick"
+
   give_me_the_stick = (msg) ->
     message_user = robot.brain.usersForFuzzyName(msg.message.user.name)[0]
-    if robot.brain.get "#{msg.message.room}:stick"
-      stick_user = robot.brain.userForId robot.brain.get("#{msg.message.room}:stick")
+    room = room_or_flow(msg)
+
+    if robot.brain.get key(msg)
+      stick_user = robot.brain.userForId robot.brain.get(key(msg))
       msg.send "I can't give the stick to you, #{message_user.name}. #{stick_user.name} has the stick."
     else
-      robot.brain.set "#{msg.message.room}:stick", message_user.id
-      msg.send "okay #{message_user.name}, you have the #{msg.message.room} stick!"
+      robot.brain.set key(msg), message_user.id
+      msg.send "okay #{message_user.name}, you have the #{room} stick!"
 
   who_has_the_stick = (msg) ->
-    if robot.brain.get "#{msg.message.room}:stick"
-      stick_user = robot.brain.userForId robot.brain.get("#{msg.message.room}:stick")
+    room = room_or_flow(msg)
+
+    if robot.brain.get key(msg)
+      stick_user = robot.brain.userForId robot.brain.get(key(msg))
       msg.send "#{stick_user.name} has the stick."
     else
-      msg.send "No one has the #{msg.message.room} stick."
+      msg.send "No one has the #{room} stick."
 
   take_the_stick = (msg)->
-    if robot.brain.get "#{msg.message.room}:stick"
+    room = room_or_flow(msg)
+
+    if robot.brain.get key(msg)
       stick_user = robot.brain.userForId robot.brain.get("stick")
-      robot.brain.set "#{msg.message.room}:stick", null
-      msg.send "#{stick_user.name} had the #{msg.message.room} stick, but I just took it."
+      robot.brain.set key(msg), null
+      msg.send "#{stick_user.name} had the #{room} stick, but I just took it. Now no one has the stick!"
     else
       msg.send "No one has the stick."
 
