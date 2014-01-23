@@ -22,7 +22,7 @@ _ = require('underscore')
 module.exports = (robot) ->
 
   room_or_flow = (msg) ->
-    ( msg.message.flow || msg.message.room || "" )
+    ( msg.message.user.flow || msg.message.room || "" )
 
   key = (msg) ->
     "#{room_or_flow(msg)}:stick"
