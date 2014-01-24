@@ -29,7 +29,7 @@ module.exports = (robot) ->
 
   give_me_the_stick = (msg) ->
     stick = robot.brain.get key(msg)
-    message_user = robot.brain.usersForFuzzyName(msg.message.user.name)[0]
+    message_user = robot.brain.userForId(msg.message.user.id)
     if stick
       stick_user = robot.brain.userForId stick
       msg.send "I can't give the stick to you, #{message_user.name}. #{stick_user.name} has the stick."
