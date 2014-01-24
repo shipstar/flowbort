@@ -28,32 +28,29 @@ module.exports = (robot) ->
     "#{room_or_flow(msg)}:stick"
 
   give_me_the_stick = (msg) ->
+    stick = robot.brain.get key(msg)
     message_user = robot.brain.usersForFuzzyName(msg.message.user.name)[0]
-    room = room_or_flow(msg)
-
-    if robot.brain.get key(msg)
-      stick_user = robot.brain.userForId robot.brain.get(key(msg))
+    if stick
+      stick_user = robot.brain.userForId stick
       msg.send "I can't give the stick to you, #{message_user.name}. #{stick_user.name} has the stick."
     else
       robot.brain.set key(msg), message_user.id
-      msg.send "okay #{message_user.name}, you have the #{room} stick!"
+      msg.send "okay #{message_user.name}, you have the stick!"
 
   who_has_the_stick = (msg) ->
-    room = room_or_flow(msg)
-
-    if robot.brain.get key(msg)
-      stick_user = robot.brain.userForId robot.brain.get(key(msg))
+    stick = robot.brain.get key(msg)
+    if stick
+      stick_user = robot.brain.userForId stick
       msg.send "#{stick_user.name} has the stick."
     else
-      msg.send "No one has the #{room} stick."
+      msg.send "No one has the stick."
 
   take_the_stick = (msg)->
-    room = room_or_flow(msg)
-
-    if robot.brain.get key(msg)
-      stick_user = robot.brain.userForId robot.brain.get(key(msg))
+    stick = robot.brain.get key(msg)
+    if stick
+      stick_user = robot.brain.userForId stick
       robot.brain.set key(msg), null
-      msg.send "#{stick_user.name} had the #{room} stick, but I just took it. Now no one has the stick!"
+      msg.send "#{stick_user.name} had the stick, but I just took it. Now no one has the stick!"
     else
       msg.send "No one has the stick."
 
