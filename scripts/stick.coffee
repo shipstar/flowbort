@@ -29,7 +29,7 @@ module.exports = (robot) ->
 
   give_me_the_stick = (msg) ->
     stick = robot.brain.get key(msg)
-    message_user = robot.brain.userForId(msg.message.user.id)
+    message_user = robot.brain.userForId msg.message.user.id
     if stick
       stick_user = robot.brain.userForId stick
       msg.send "I can't give the stick to you, #{message_user.name}. #{stick_user.name} has the stick."
@@ -50,7 +50,7 @@ module.exports = (robot) ->
     if stick
       stick_user = robot.brain.userForId stick
       robot.brain.set key(msg), null
-      msg.send "#{stick_user.name} had the stick, but I just took it. Now no one has the stick!"
+      msg.send "Stick released from #{stick_user.name}'s grasp."
     else
       msg.send "No one has the stick."
 
