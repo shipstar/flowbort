@@ -10,6 +10,7 @@
 # Commands:
 #   stick?
 #   stick!
+#   stick! (For this reason I am deploying)
 #   !stick
 #   hubot who has the stick?
 #   hubot make <user> drop the stick!
@@ -29,19 +30,25 @@ module.exports = (robot) ->
 
   give_me_the_stick = (msg) ->
     stick = robot.brain.get key(msg)
+    desc = msg.match[1]
     message_user = robot.brain.userForId msg.message.user.id
     if stick
       stick_user = robot.brain.userForId stick
       msg.send "I can't give the stick to you, #{message_user.name}. #{stick_user.name} has the stick."
     else
       robot.brain.set key(msg), message_user.id
+      if desc
+        robot.brain.set "#{key(msg)}:desc", desc
       msg.send "okay #{message_user.name}, you have the stick!"
 
   who_has_the_stick = (msg) ->
     stick = robot.brain.get key(msg)
+    desc  = robot.brain.get "#{key(msg)}:desc"
     if stick
       stick_user = robot.brain.userForId stick
       msg.send "#{stick_user.name} has the stick."
+      if desc
+        msg.send "Here's why: #{desc}"
     else
       msg.send "No one has the stick."
 
@@ -50,14 +57,15 @@ module.exports = (robot) ->
     if stick
       stick_user = robot.brain.userForId stick
       robot.brain.set key(msg), null
+      robot.brain.set "#{key(msg)}:desc", null
       msg.send "Stick released from #{stick_user.name}'s grasp."
     else
       msg.send "No one has the stick."
 
 
 
-  robot.respond /give me the stick\!/i, give_me_the_stick
-  robot.hear /^stick\!/i, give_me_the_stick
+  robot.respond /give me the stick\! ?(.*)?/i, give_me_the_stick
+  robot.hear /^stick\! ?(.*)?/i, give_me_the_stick
 
   robot.respond /who has stick\?/i, who_has_the_stick
   robot.hear /^stick\?/i, who_has_the_stick
