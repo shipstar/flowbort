@@ -25,6 +25,3 @@ images = [
 module.exports = (robot) ->
   robot.hear /patrick swayze.*/i, (msg) ->
     msg.send msg.random images
-
-  robot.hear /comic sans/i, (msg) ->
-    msg.reply "http://33.media.tumblr.com/dcbf85cf41f77a3431d2106880f9b57e/tumblr_nazd3oNyUj1threnmo1_500.gif"
