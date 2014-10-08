@@ -14,12 +14,12 @@
 #   armilam
 
 images = [
-  "http://giphy.com/gifs/patrick-swayze-road-house-kelly-lynch-5k9ntv01OQhMY",
-  "http://giphy.com/gifs/patrick-swayze-road-house-kelly-lynch-RxQOX0g1Ibk5O",
-  "http://giphy.com/gifs/v22JfwLFi6nNS",
-  "http://giphy.com/gifs/N03DjKoHJVjxe",
-  "http://giphy.com/gifs/VzP9FmGm1qWxq",
-  "http://giphy.com/gifs/patrick-swayze-road-house-kelly-lynch-69OUouHRzrvcA"
+  "http://media.giphy.com/media/5k9ntv01OQhMY/giphy.gif",
+  "http://media.giphy.com/media/RxQOX0g1Ibk5O/giphy.gif",
+  "http://media.giphy.com/media/v22JfwLFi6nNS/giphy.gif",
+  "http://media.giphy.com/media/N03DjKoHJVjxe/giphy.gif",
+  "http://media.giphy.com/media/VzP9FmGm1qWxq/giphy.gif",
+  "http://media.giphy.com/media/69OUouHRzrvcA/giphy.gif"
 ]
 
 module.exports = (robot) ->
