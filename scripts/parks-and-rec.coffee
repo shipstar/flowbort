@@ -9,15 +9,13 @@
 #
 # Commands:
 #   hubot parks - Display a random Parks and Rec gif/image
+#   comic sans - Display a gif of Jerry from Parks and Rec saying "Comic Sans screams fun"
 #
 # Author:
 #   shipstar
 
 images = [
   # jean ralphio
-  "http://cdn.uproxx.com/wp-content/uploads/2012/11/jeanralphio-dunk.gif",
-  "http://cdn.uproxx.com/wp-content/uploads/2012/11/jeanralphio-five.gif",
-  "http://cdn.uproxx.com/wp-content/uploads/2012/11/jeanralphio-opening.gif",
   "http://scootsa1000momofthree.files.wordpress.com/2012/11/rent-a-swag.gif?w=655",
   "http://media.tumblr.com/tumblr_llk9neyXnN1qav6pp.gif",
 
@@ -40,7 +38,6 @@ images = [
   "http://media.tumblr.com/tumblr_mc1txmZtfU1qh6ss0.gif",
 
   # andy
-  "http://cdn.uproxx.com/wp-content/uploads/2013/07/andy-dwyer-dealornodeal.gif",
   "http://tn.loljam.com/14/upload/post/201305/24/10816/5525f562d4db34aafbc91c6f31d20639.gif",
   "http://replygif.net/i/1136.gif",
 
@@ -48,17 +45,14 @@ images = [
   "http://25.media.tumblr.com/tumblr_lr40gt7FrS1qly9zdo1_400.gif",
   "http://iamthepdxsx.files.wordpress.com/2012/12/tom-haverford-dunzo.gif?w=500",
   "http://3.bp.blogspot.com/-Vn6c6IlAJJU/TcY6j7X6KFI/AAAAAAAAAY4/cTgITFFMsJs/s400/A0X8h.gif",
-  "http://static.fjcdn.com/gifs/tom_a19099_2325116.gif",
 
   # jerry
-  "http://i1.ytimg.com/vi/T5nHVRb1AyU/hqdefault.jpg",
   "http://oyster.ignimgs.com/wordpress/stg.ign.com/2013/04/Parks-and-Recreation-Season-5-Two-Jerrys-Retirement.jpg",
   "http://www.simplyinthesuburbs.com/wp-content/uploads/2013/04/Breakfast-Traditions.jpg",
-  "http://cdn.uproxx.com/wp-content/uploads/2012/01/jerry-comicsans2.gif"
 
   # ben
   "http://thoughtcatalog.files.wordpress.com/2012/12/benwyatt-micdrop.gif?w=584",
-  "http://31.media.tumblr.com/32f271e2c7da42a7bcdaaa3960ba9634/tumblr_mqvgqay1WH1rdh9azo1_500.gif",
+  "http://31.media.tumblr.com/32f271e2c7da42a7bcdaaa3960ba9634/tumblr_mqvgqay1WH1rdh9azo1_500.gif"
 ]
 
 module.exports = (robot) ->
@@ -66,4 +60,4 @@ module.exports = (robot) ->
     msg.send msg.random images
 
   robot.hear /comic sans/i, (msg) ->
-    msg.reply "http://cdn.uproxx.com/wp-content/uploads/2012/01/jerry-comicsans2.gif"
+    msg.reply "http://33.media.tumblr.com/dcbf85cf41f77a3431d2106880f9b57e/tumblr_nazd3oNyUj1threnmo1_500.gif"
