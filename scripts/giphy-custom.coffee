@@ -29,7 +29,6 @@ giphyMe = (msg, query, cb) ->
     .get() (err, res, body) ->
       response = undefined
       try
-        cb body
         response = JSON.parse(body)
         images = response.data
         if images.length > 0
