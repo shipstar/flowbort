@@ -1,10 +1,3 @@
-# Description:
-#   Responds to "fuck you" and "you're drunk".
-#
-# Commands:
-#   fuck you, Bort
-#   bort, you're drunk
-#   i love you bort
 
 hated_people = [
   'mitch'
