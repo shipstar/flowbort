@@ -30,7 +30,7 @@ module.exports = (robot) ->
 
   if process.env.HUBOT_INSTRUMENTAL_GRAPH_EMBED_TOKENS?
     mappings = String(process.env.HUBOT_INSTRUMENTAL_GRAPH_EMBED_TOKENS).split(/\s*,\s*/)
-    for i in [0..mappings.length]
+    for i in [0...mappings.length] by 2
       room_mappings[mappings[i].toLowerCase()] = mappings[i+1]
   else
     robot.logger.warning 'The HUBOT_INSTRUMENTAL_GRAPH_EMBED_TOKENS environment variable not set'
