@@ -29,10 +29,11 @@ module.exports = (robot) ->
     ( msg.message.user.flow || msg.message.room || "" ).toLowerCase()
 
   name_for_flow = (flow_id) ->
-    for flow in robot.joinedFlows()
-      robot.logger.warning(JSON.stringify(flow))
-      if flow.id == flow_id
-        return flow.name
+    if robot?.adapter?.joinedFlows
+      for flow in robot.adapter.joinedFlows()
+        robot.logger.warning(JSON.stringify(flow))
+        if flow.id == flow_id
+          return flow.name
     flow_id
 
   if process.env.HUBOT_INSTRUMENTAL_GRAPH_EMBED_TOKENS?
