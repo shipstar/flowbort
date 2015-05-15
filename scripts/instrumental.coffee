@@ -11,7 +11,10 @@
 #   HUBOT_INSTRUMENTAL_GRAPH_EMBED_TOKENS
 #
 # Commands:
-#   graph ((expression), expression) (at time)
+#   graph me ((expression), expression) (at TIME) (for DURATION)
+#
+# TIME:     May be relative ( 2 weeks ago, 12/31/1980 12:30 pm, etc.)
+# DURATION: NUMBER (minutes|hours|days|weeks|months|years)
 #
 # Author:
 #   eb
