@@ -74,11 +74,14 @@ module.exports = (robot) ->
     [time, duration] = [clauses["at"], clauses["for"]]
     if time == -1
       time = new Date(new Date().getTime() - duration * 1000)
-    embed_token = room_mappings[room_or_flow(msg)]
+
+    room = room_or_flow(msg)
+    embed_token = room_mappings[room]
+    query = "?"
+    for expr in expressions.split(/\s*,\s*/)
+      query += escape("graph[metrics][]") + "=" + escape(expr) + "&"
+    query += "duration=" + duration + "&start=" + Math.ceil(time.getTime() / 1000)
+    robot.logger.warning "Room #{room} has embed token #{embed_token}, query will be #{query}"
     if embed_token?
-      query = "?"
-      for expr in expressions.split(/\s*,\s*/)
-        query += escape("graph[metrics][]") + "=" + escape(expr) + "&"
-      query += "duration=" + duration + "&start=" + Math.ceil(time.getTime() / 1000)
       embed_url = "https://instrumentalapp.com/graphs/#{embed_token}/new.png" + query
       msg.send(embed_url)
