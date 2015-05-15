@@ -25,14 +25,17 @@ module.exports = (robot) ->
 
   room_mappings = {}
 
+  room_or_flow = (msg) ->
+    ( msg.message.user.flow || msg.message.room || "" ).toLowerCase()
+
   if process.env.HUBOT_INSTRUMENTAL_GRAPH_EMBED_TOKENS?
     mappings = String(process.env.HUBOT_INSTRUMENTAL_GRAPH_EMBED_TOKENS).split(/\s*,\s*/)
     for i in [0..mappings.length]
-      room_mappings[mappings[i]] = mappings[i+1]
+      room_mappings[mappings[i].toLowerCase()] = mappings[i+1]
   else
     robot.logger.warning 'The HUBOT_INSTRUMENTAL_GRAPH_EMBED_TOKENS environment variable not set'
 
-  robot.hear /graph me (([^,\s]+)(,\s*[^,\s]+)*)(\s+(at|for) .+)?/i, (msg) ->
+  robot.respond /graph me (([^,\s]+)(,\s*[^,\s]+)*)(\s+(at|for) .+)?/i, (msg) ->
     expressions = msg.match[1]
     clauses     = { "at": -1, "for": 1800 }
     qual_str    = String(msg.match[4]).trim().split(/\s+/)
@@ -56,6 +59,8 @@ module.exports = (robot) ->
                                              2592000
                                            else if unit.match(/years?/i)
                                              31536000
+                                           else
+                                             0
                         parser_clauses["for"] = mult * Number(distance)
 
     for token in qual_str
@@ -69,7 +74,7 @@ module.exports = (robot) ->
     [time, duration] = [clauses["at"], clauses["for"]]
     if time == -1
       time = new Date(new Date().getTime() - duration * 1000)
-    embed_token = room_mappings[msg.room]
+    embed_token = room_mappings[room_or_flow(msg)]
     if embed_token?
       query = "?"
       for expr in expressions.split(/\s*,\s*/)
