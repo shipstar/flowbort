@@ -26,7 +26,7 @@ module.exports = (robot) ->
   room_mappings = {}
 
   room_or_flow = (msg) ->
-    ( msg.message.user.flow || msg.message.room || "" ).toLowerCase()
+    ( msg.message.user.flow || msg.message.room || "" )
 
   name_for_flow = (flow_id) ->
     if robot?.adapter?.joinedFlows
@@ -83,7 +83,7 @@ module.exports = (robot) ->
     if time == -1
       time = new Date(new Date().getTime() - duration * 1000)
 
-    room = name_for_flow(room_or_flow(msg))
+    room = name_for_flow(room_or_flow(msg)).toLowerCase()
     embed_token = room_mappings[room]
     query = "?"
     for expr in expressions.split(/\s*,\s*/)
