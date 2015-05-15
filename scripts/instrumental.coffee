@@ -66,7 +66,7 @@ module.exports = (robot) ->
     [time, duration] = [clauses["at"], clauses["for"]]
     if time == -1
       time = new Date(new Date().getTime() - duration * 1000)
-    embed_token = room_mappings[msg.room] || "CHECKTOKEN"
+    embed_token = room_mappings[msg.room]
     if embed_token?
       query = "?"
       for expr in expressions.split(/\s*,\s*/)
