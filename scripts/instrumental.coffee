@@ -28,6 +28,13 @@ module.exports = (robot) ->
   room_or_flow = (msg) ->
     ( msg.message.user.flow || msg.message.room || "" ).toLowerCase()
 
+  name_for_flow = (flow_id) ->
+    for flow in robot.joinedFlows()
+      robot.logger.warning(JSON.stringify(flow))
+      if flow.id == flow_id
+        return flow.name
+    flow_id
+
   if process.env.HUBOT_INSTRUMENTAL_GRAPH_EMBED_TOKENS?
     mappings = String(process.env.HUBOT_INSTRUMENTAL_GRAPH_EMBED_TOKENS).split(/\s*,\s*/)
     for i in [0...mappings.length] by 2
@@ -75,7 +82,7 @@ module.exports = (robot) ->
     if time == -1
       time = new Date(new Date().getTime() - duration * 1000)
 
-    room = room_or_flow(msg)
+    room = name_for_flow(room_or_flow(msg))
     embed_token = room_mappings[room]
     query = "?"
     for expr in expressions.split(/\s*,\s*/)
