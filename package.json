@@ -31,12 +31,12 @@
     "scraper": ">= 0.0.9",
     "underscore": ">=1.5.0",
     "clark": "0.0.6",
-    "wolfram": "0.2.6",
-    "jake": "latest"
+    "jake": "latest",
+    "sugar": "latest"
   },
 
   "engines": {
-    "node": ">= 0.8.x",
-    "npm":  ">= 1.1.x"
+    "node": "= 0.12.0",
+    "npm":  "= 2.7.4"
   }
 }
