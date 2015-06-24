@@ -31,9 +31,9 @@ module.exports = (robot) ->
   give_me_the_stick = (msg) ->
     stick = robot.brain.get key(msg)
     desc = msg.match[1]
-    message_user = robot.brain.userForId msg.message.user.id
-    if stick
-      stick_user = robot.brain.userForId stick
+    message_user = robot.brain.userForId(msg.message.user.id)
+    stick_user = robot.brain.userForId(stick)
+    if stick && stick_user != message_user
       msg.send "I can't give the stick to you, #{message_user.name}. #{stick_user.name} has the stick."
     else
       robot.brain.set key(msg), message_user.id
