@@ -12,24 +12,18 @@
 #
 # Author:
 #   armilam
-
-# environments =
-#   beta: "lessonly-testing"
-
-# module.exports = (robot) ->
-#   robot.hear /restart (.+)/i, (msg) ->
-#     restart_app = environments[msg.match[1]]
-#     if restart_app
-#       msg.send environments[msg.match[1]]
-#     else
-#       msg.send "I don't know how to restart #{msg.match[1]}"
+#   (much copied from github.com/daemonsy/hubot-heroku)
 
 Heroku = require('heroku-client')
 heroku = new Heroku(token: process.env.HUBOT_HEROKU_API_KEY)
 
-enviroments =
+environments =
   beta:
     app: "lessonly-testing"
+  staging:
+    app: "lessonly-staging"
+  production:
+    app: "lessons-igo"
 
 module.exports = (robot) ->
   auth = (msg, environment, command) ->
@@ -74,9 +68,12 @@ module.exports = (robot) ->
     buildpack:    response.buildpack_provided_description
     stack:        response.build_stack && response.build_stack.name
 
+  app_name = (env_name) ->
+    environments[env_name]["app"]
+
   # App Info
   robot.respond /heroku info (.*)/i, (msg) ->
-    appName = msg.match[1]
+    appName = app_name msg.match[1]
 
     return unless auth(msg, appName, "info")
 
@@ -88,3 +85,38 @@ module.exports = (robot) ->
       else
         ""
       respondToUser(msg, error, "\n" + message)
+
+  # Restart
+  robot.respond /heroku restart ([\w-]+)\s?(\w+(?:\.\d+)?)?/i, (msg) ->
+    appName = app_name msg.match[1]
+    dynoName = msg.match[2]
+    dynoNameText = if dynoName then ' '+dynoName else ''
+
+    return unless auth(msg, appName)
+
+    msg.reply "Telling Heroku to restart #{appName}#{dynoNameText}"
+
+    unless dynoName
+      heroku.apps(appName).dynos().restartAll (error, app) ->
+        respondToUser(msg, error, "Heroku: Restarting #{appName}")
+    else
+      heroku.apps(appName).dynos(dynoName).restart (error, app) ->
+        respondToUser(msg, error, "Heroku: Restarting #{appName}#{dynoNameText}")
+
+  # Releases
+  robot.respond /heroku releases (.*)$/i, (msg) ->
+    appName = app_name msg.match[1]
+
+    return unless auth(msg, appName)
+
+    msg.reply "Getting releases for #{appName}"
+
+    heroku.apps(appName).releases().list (error, releases) ->
+      output = []
+      if releases
+        output.push "Recent releases of #{appName}"
+
+        for release in releases.sort((a, b) -> b.version - a.version)[0..9]
+          output.push "v#{release.version} - #{release.description} - #{release.user.email} -  #{release.created_at}"
+
+      respondToUser(msg, error, output.join("\n"))
