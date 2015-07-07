@@ -8,7 +8,9 @@
 #   None
 #
 # Commands:
-#   restart {environment}
+#   bort heroku info {environment}
+#   bort heroku restart {environment}
+#   bort heroku releases {environment}
 #
 # Author:
 #   armilam
@@ -73,9 +75,10 @@ module.exports = (robot) ->
 
   # App Info
   robot.respond /heroku info (.*)/i, (msg) ->
-    appName = app_name msg.match[1]
+    env = msg.match[1]
+    appName = app_name env
 
-    return unless auth(msg, appName, "info")
+    return unless auth(msg, env, "info")
 
     msg.reply "Getting information about #{appName}"
 
@@ -88,11 +91,12 @@ module.exports = (robot) ->
 
   # Restart
   robot.respond /heroku restart ([\w-]+)\s?(\w+(?:\.\d+)?)?/i, (msg) ->
-    appName = app_name msg.match[1]
+    env = msg.match[1]
+    appName = app_name env
     dynoName = msg.match[2]
     dynoNameText = if dynoName then ' '+dynoName else ''
 
-    return unless auth(msg, appName)
+    return unless auth(msg, env, "restart")
 
     msg.reply "Telling Heroku to restart #{appName}#{dynoNameText}"
 
@@ -105,9 +109,10 @@ module.exports = (robot) ->
 
   # Releases
   robot.respond /heroku releases (.*)$/i, (msg) ->
-    appName = app_name msg.match[1]
+    env = msg.match[1]
+    appName = app_name env
 
-    return unless auth(msg, appName)
+    return unless auth(msg, env, "releases")
 
     msg.reply "Getting releases for #{appName}"
 
