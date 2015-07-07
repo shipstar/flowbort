@@ -2,6 +2,5 @@
   "redis-brain.coffee", "shipit.coffee",
   "points.coffee", "swanson.coffee",
   "location-decision-maker.coffee", "remind.coffee",
-  "keep-alive.coffee", "ambush.coffee",
-  "hubot-auth", "hubot-heroku"
+  "keep-alive.coffee", "ambush.coffee"
 ]
