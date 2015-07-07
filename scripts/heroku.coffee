@@ -83,4 +83,8 @@ module.exports = (robot) ->
     msg.reply "Getting information about #{appName}"
 
     heroku.apps(appName).info (error, info) ->
-      respondToUser(msg, error, "\n" + objectToMessage(info_mapper(info)))
+      message = if info
+        objectToMessage(info_mapper(info))
+      else
+        ""
+      respondToUser(msg, error, "\n" + message)
