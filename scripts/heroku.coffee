@@ -34,8 +34,8 @@ enviroments =
 module.exports = (robot) ->
   auth = (msg, environment, command) ->
     role = "heroku-#{command}-#{environment}"
-    hasRole = robot.auth.hasRole(msg.envelope.user, role)
-    isAdmin = robot.auth.hasRole(msg.envelope.user, 'admin')
+    hasRole = robot.auth.hasRole(robot.brain.userForName(msg.envelope.user.name), role)
+    isAdmin = robot.auth.hasRole(robot.brain.userForName(msg.envelope.user.name), 'admin')
     if not (hasRole or isAdmin)
       msg.reply "Access denied. You must have this role to use this command: #{role}"
       return false
