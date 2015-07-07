@@ -27,7 +27,7 @@
 Heroku = require('heroku-client')
 heroku = new Heroku(token: process.env.HUBOT_HEROKU_API_KEY)
 
-enviroments =
+environments =
   beta:
     app: "lessonly-testing"
 
@@ -74,9 +74,12 @@ module.exports = (robot) ->
     buildpack:    response.buildpack_provided_description
     stack:        response.build_stack && response.build_stack.name
 
+  app_name = (env_name) ->
+    environments[env_name]["app"]
+
   # App Info
   robot.respond /heroku info (.*)/i, (msg) ->
-    appName = msg.match[1]
+    appName = app_name msg.match[1]
 
     return unless auth(msg, appName, "info")
 
@@ -88,3 +91,20 @@ module.exports = (robot) ->
       else
         ""
       respondToUser(msg, error, "\n" + message)
+
+  # Restart
+  robot.respond /heroku restart ([\w-]+)\s?(\w+(?:\.\d+)?)?/i, (msg) ->
+    appName = app_name msg.match[1]
+    dynoName = msg.match[2]
+    dynoNameText = if dynoName then ' '+dynoName else ''
+
+    return unless auth(msg, appName)
+
+    msg.reply "Telling Heroku to restart #{appName}#{dynoNameText}"
+
+    unless dynoName
+      heroku.apps(appName).dynos().restartAll (error, app) ->
+        respondToUser(msg, error, "Heroku: Restarting #{appName}")
+    else
+      heroku.apps(appName).dynos(dynoName).restart (error, app) ->
+        respondToUser(msg, error, "Heroku: Restarting #{appName}#{dynoNameText}")
