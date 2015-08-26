@@ -7,7 +7,7 @@
 # Commands:
 #   hubot gif me <query> - Returns an animated gif matching the requested search term.
 
-no_gif_found = process.env.NO_GIF_FOUND_RESPONSE
+no_gif_found = "http://media1.giphy.com/media/8HoHlbs5rhsLC/giphy.gif"
 
 giphy =
   api_key: process.env.HUBOT_GIPHY_API_KEY
@@ -35,7 +35,7 @@ giphyMe = (msg, query, cb) ->
           image = msg.random images
           cb image.images.original.url
         else
-          cb no_gif_found.replace('#{user_name}', msg.envelope.user.name)
+          cb no_gif_found
 
       catch e
         response = undefined
