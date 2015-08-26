@@ -1,6 +1,6 @@
 [
   "redis-brain.coffee", "shipit.coffee",
   "points.coffee", "swanson.coffee",
-  "location-decision-maker.coffee", "remind.coffee",
+  "location-decision-maker.coffee",
   "keep-alive.coffee", "ambush.coffee"
 ]
