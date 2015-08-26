@@ -21,6 +21,7 @@
   },
   "dependencies": {
     "cheerio": ">= 0.12.1",
+    "chrono-node": ">= 1.0.0",
     "clark": "0.0.6",
     "hubot": ">= 2.11.0 < 3.0.0",
     "hubot-auth": "^1.2.0",
