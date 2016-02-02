@@ -39,6 +39,9 @@ query_and_respond = (query, msg) ->
           pretty_json += JSON.stringify(event)
           pretty_json += "\n"
 
+        if pretty_json.length > 8094 # max length of flowdock message - 2 backticks for code block
+          pretty_json = pretty_json.substring(pretty_json.length - 8094)
+
         msg.send "`#{pretty_json}`" # wrap it in backticks so it will come back as a code block
       )
 
@@ -53,7 +56,7 @@ module.exports = (robot) ->
 
   robot.respond /logs company (.*)/i, (msg) ->
     subdomain = msg.match[1]
-    query_and_respond("host=#{subdomain}")
+    query_and_respond("host=#{subdomain}", msg)
 
   robot.respond /logs help/i, (msg) ->
     msg.send '\n' +
