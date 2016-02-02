@@ -37,10 +37,10 @@ query_and_respond = (query, msg) ->
         pretty_json = ''
         for event in events
           pretty_json += JSON.stringify(event)
-          pretty_json += "\n\n"
+          pretty_json += "\n"
 
         if pretty_json.length > 8090 # max length of flowdock message (8096) - 6 backticks for code block
-          pretty_json = pretty_json.substring(pretty_json.length - 8094)
+          pretty_json = pretty_json.substring(pretty_json.length - 8090)
 
         msg.send "```#{pretty_json}```" # wrap it in backticks so it will come back as a code block
       )
