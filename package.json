@@ -20,7 +20,7 @@
     "url": "https://github.com/github/hubot.git"
   },
   "dependencies": {
-    "cheerio": ">= 0.12.1",
+    "cheerio": ">= 0.2.0",
     "chrono-node": ">= 1.0.0",
     "clark": "0.0.6",
     "hubot": ">= 2.11.0 < 3.0.0",
