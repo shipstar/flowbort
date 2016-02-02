@@ -31,7 +31,6 @@
     "jake": "latest",
     "lodash": ">= 3.10.1",
     "moment": ">= 2.10.6",
-    "scraper": ">= 0.0.9",
     "underscore": ">=1.5.0",
     "wolfram": "0.3.1"
   },
