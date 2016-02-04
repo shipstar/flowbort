@@ -14,6 +14,16 @@ You can test your hubot by running the following.
 
     % bin/hubot
 
+You can also run hubot locally, but connect it to flowdock with
+
+    % bin/hubot -a flowdock -n bort
+
+** Please note that this will cause there to be 2 active Bort instances -- i.e., if you say 'ping', you will get two 'PONG's. **
+That being said, you could always disable any scripts locally that you are not testing, or do it during non-peak use hours where
+double GIFs and banter won't cause as much disruption.
+
+You will also need to get the flowdock API key from our Heroku config.
+
 You'll see some start up output about where your scripts come from and a
 prompt.
 
