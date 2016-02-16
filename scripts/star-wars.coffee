@@ -29,5 +29,5 @@ module.exports = (robot) ->
   robot.hear /no{3,}/i, (msg) ->
     msg.send msg.random nooo
 
-  robot.hear /a\strap/i, (msg) ->
+  robot.hear /\ba\strap\b/i, (msg) ->
     msg.send msg.random its_a_trap
