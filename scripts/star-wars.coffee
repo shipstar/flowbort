@@ -21,7 +21,8 @@ nooo = [
 ]
 
 its_a_trap = [
-  'http://i.imgur.com/LaJ9Kmo.gif'
+  'http://i.imgur.com/LaJ9Kmo.gif',
+  'http://i.imgur.com/caS91VV.jpg'
 ]
 
 module.exports = (robot) ->
