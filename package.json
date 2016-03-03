@@ -27,7 +27,7 @@
     "hubot": ">= 2.11.0 < 3.0.0",
     "hubot-auth": "^1.2.0",
     "hubot-flowdock": ">= 0.0.1",
-    "hubot-github-assignments": "0.0.1",
+    "hubot-github-assignments": "latest",
     "hubot-lists": "latest",
     "hubot-scripts": ">= 2.5.0 < 3.0.0",
     "jake": "latest",
